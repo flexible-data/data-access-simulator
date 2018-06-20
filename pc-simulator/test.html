@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+
+    <!--以下为必须js模块-->
+   <script>
+      (function(para) {
+        var p = para.sdk_url, n = para.name, w = window, d = document, s = 'script',x = null,y = null;
+        w['sensorsDataAnalytic201505'] = n;
+        w[n] = w[n] || function(a) {return function() {(w[n]._q = w[n]._q || []).push([a, arguments]);}};
+        var ifs = ['track','quick','register','registerPage','registerOnce','clearAllRegister','trackSignup', 'trackAbtest', 'setProfile','setOnceProfile','appendProfile', 'incrementProfile', 'deleteProfile', 'unsetProfile', 'identify','login','logout','trackLink','clearAllRegister'];
+        for (var i = 0; i < ifs.length; i++) {
+          w[n][ifs[i]] = w[n].call(null, ifs[i]);
+        }
+        if (!w[n]._t) {
+          x = d.createElement(s), y = d.getElementsByTagName(s)[0];
+          x.async = 1;
+          x.src = p;
+          y.parentNode.insertBefore(x, y);
+          w[n].para = para;
+        }
+      })({
+        sdk_url: 'http://static.sensorsdata.cn/sdk/1.7.1.2/sensorsdata.min.js',
+        name: 'sa',
+
+        server_url: 'http://localhost:8033/logate/data',
+        //server_url: 'http://test.dtyunxi.cn:8300/logate/data',
+        //server_url: 'http://192.168.33.12:8033/yundt-data-buriedpoint/data',
+        //server_url: 'https://stg.xl.dtyunxi.com/yundt-data-buriedpoint/data',
+        //server_url: 'https://test-b2c.cmaotai.net/yundt-data-buriedpoint/data',
+        //server_url: 'https://stg.xl.dtyunxi.com/yundt-data-buriedpoint/data',
+        heatmap: {
+            isTrackLink: false,
+            //设置成 true 后，我们会自动给 a 标签绑定一个 sa.trackLink() 方法（详见本页 3.3 ），如果是单页面 a 标签不涉及页面跳转或者 a 标签的点击是下载功能，建议不要打开。默认 false 。
+            loadTimeout:  3000,
+            //设置多少毫秒后开始渲染点击图
+            collect_url: function(){
+                //如果只采集首页
+                if(location.href === 'C:\\Users\\tan.jie\\Desktop\\tanjie\\git\\newretail-dtplatform\\src\\main\\go\\com\\dtyunxi\\dtplatform\\collector\\test\\test.html'){
+                    return true;
+                }
+            }
+            //返回true会采集当前页面的数据，返回false等假值表示不采集当前页面,设置这个函数后，内容为空的话，默认是返回假的。不写这个函数，默认是采集所有页面。
+        },
+        use_client_time:true
+      });
+      sa.quick('autoTrack');
+    </script>
+</head>
+<body>
+
+<button class="ViewHomePage">访问首页</button><br>
+<button class="SearchItem">搜索商品</button><br>
+<button class="ViewItem">浏览商品</button><br>
+<button class="AddCart">添加购物车</button><br>
+<button class="RegisterEvent">用户注册事件</button><br>
+<button class="LoginSccuess">登录/注册成功事件</button><br>
+<button class="LoginOut">退出登录</button><br>
+<button class="CollectItem">收藏商品</button><br>
+<button class="ShareItem">分享商品</button><br>
+<button class="SubmitOrder">提交订单</button><br>
+<button class="PayOrder">支付订单</button><br>
+<button class="CancelOrder">取消订单</button><br>
+<button class="ReceiveItem">确认收货</button><br>
+<button class="ServiceAfterSale">售后服务</button>
+<a href="C:\Users\tan.jie\Desktop\tanjie\git\newretail-dtplatform\src\main\go\com\dtyunxi\dtplatform\collector\test\test.html?utm_source=sina&utm_medium=banner&utm_content=top&utm_campaign=spring">广告</a>
+
+<script>
+    $(".ViewHomePage").click(function(){
+        sa.track('ViewHomePage', {         // 事件名
+         "channel":"baidu"
+        });
+    });
+    $(".SearchItem").click(function(){
+        sa.track('SearchItem', {         // 事件名
+         "keyword":"电饭煲"
+        });
+    });
+
+    $(".ViewItem").click(function(){
+        sa.track('ViewItem', {         // 事件名
+          itemID:"123",
+          itemName:"汽车",
+          shopID:"123",
+          shopName:"长安",
+          skuID:"1234",
+          startTime:"134214312412",
+          endTime:"1234214124312",
+          durationTime:"133"
+        });
+    });
+     $(".CollectItem").click(function(){
+        sa.track('CollectItem', {         // 事件名
+          itemID:"123",
+          itemName:"汽车",
+          shopID:"123",
+          shopName:"长安",
+          skuID:"1234",
+          startTime:"134214312412",
+          endTime:"1234214124312",
+          durationTime:"133"
+        });
+    });
+      $(".ShareItem").click(function(){
+        sa.track('ShareItem', {         // 事件名
+          itemID:"123",
+          itemName:"汽车",
+          shopID:"123",
+          shopName:"长安",
+          skuID:"1234",
+          startTime:"134214312412",
+          endTime:"1234214124312",
+          durationTime:"133"
+        });
+    });
+
+    $(".AddCart").click(function(){
+        sa.track('AddCart', {         // 事件名
+          itemID:"123",
+          itemName:"汽车",
+          skuID:"123",
+          shopID:"342",
+          shopName:"长安",
+          itemUnitPrice:"123.3",
+          itemAmount:"1",
+          itemTotalPrice:"123.3"
+        });
+    });
+
+  $(".SubmitOrder").click(function(){
+        sa.track('SubmitOrder', {         // 事件名
+        orderID:"1234",
+        orderTotalPrice:"21",
+        shipPrice:"12",
+        consigne:"tanjie",
+        cellPhone:"12345",
+        address:"sxxga"
+       /* itemList:[
+        {
+          itemID:"123",
+          itemName:"汽车",
+          skuID:"123",
+          shopID:"213",
+          shopName:"长安",
+          itemUnitPrice:123,
+          itemAmount:123,
+          itemTotalPrice：34
+        }
+        ]*/
+        });
+    });
+
+    $(".RegisterEvent").click(function(){
+        sa.track('RegisterEvent', {         // 事件名
+        city:"北京",
+        province:"",
+        name:"张三",
+        signupTime:"2017-08-09 10:30:45",
+        gender:"男",
+        birthday:"1993-02-28",
+        registryChannel:"baidu"
+        });
+    });
+
+
+  $(".LoginSccuess").click(function(){
+       sa.login('tanjie');
+    });
+
+  $(".LoginOut").click(function(){
+     sa.logout ();
+  });
+</script>
+</body>
+</html>
